@@ -6,7 +6,13 @@
              mc:Ignorable="d"
              xmlns:controls="clr-namespace:ToDoListBertoni.Controls"
              xmlns:resources="clr-namespace:ToDoListBertoni.Resources"
+             xmlns:converters="clr-namespace:ToDoListBertoni.Converters"
              x:Class="ToDoListBertoni.Views.ToDoItemView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StatusEnableConverter x:Key="StatusEnableConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -28,6 +34,7 @@
             <Button HorizontalOptions="Fill"
                     Text="{Static resources:Labels.MarkComplete}"
                     Command="{Binding CompleteItemCommand}"
+                    IsEnabled="{Binding SelectedItem.Status, Converter={StaticResource StatusEnableConverter}}"
                     Grid.Row="1"
                     Grid.Column="0"/>
 
