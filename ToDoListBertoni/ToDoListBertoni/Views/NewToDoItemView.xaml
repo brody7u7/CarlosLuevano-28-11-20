@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:controls="clr-namespace:ToDoListBertoni.Controls"
+             xmlns:resources="clr-namespace:ToDoListBertoni.Resources"
+             x:Class="ToDoListBertoni.Views.NewToDoItemView">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Editor HorizontalOptions="Fill"
+                    VerticalOptions="Fill"
+                    Text="{Binding NewItemDescription, Mode=TwoWay}"
+                    Grid.Row="0"/>
+
+            <Button HorizontalOptions="Fill"
+                    Text="{Static resources:Labels.Add}"
+                    Command="{Binding AddNewItemCommand}"
+                    Grid.Row="1"/>
+            
+            <controls:LoadingView IsRunning="{Binding IsBusy}"
+                                  Grid.Row="0" 
+                                  Grid.RowSpan="2"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

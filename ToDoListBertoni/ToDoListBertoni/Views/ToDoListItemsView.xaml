@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:controls="clr-namespace:ToDoListBertoni.Controls"
+             xmlns:behaviorspack="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
+             xmlns:cells="clr-namespace:ToDoListBertoni.Views.Cells"
+             xmlns:resources="clr-namespace:ToDoListBertoni.Resources"
+             x:Class="ToDoListBertoni.Views.ToDoListItems">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <ListView HorizontalOptions="Fill"
+                      VerticalOptions="Fill"
+                      SelectionMode="None"
+                      SeparatorVisibility="None"
+                      ItemsSource="{Binding Items}"
+                      Grid.Row="0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <cells:ToDoItemCell/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.Behaviors>
+                    <behaviorspack:EventToCommandBehavior EventName="ItemTapped"
+                                                          Command="{Binding SelectItemCommand}"
+                                                          EventArgsPropertyPath="Item"/>
+                </ListView.Behaviors>
+            </ListView>
+            
+            <Button HorizontalOptions="Fill"
+                    Text="{Static resources:Labels.New}"
+                    Command="{Binding OpenNewItemCommand}"
+                    Grid.Row="1"/>
+            
+            <controls:LoadingView IsRunning="{Binding IsBusy}" 
+                                  Grid.Row="0" 
+                                  Grid.RowSpan="2"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
